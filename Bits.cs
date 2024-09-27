@@ -44,7 +44,7 @@ public static class Bits
         return buf.ToString().ToCharArray();
     }
 
-    public static void ToFile(string bits)
+    public static void ToFile(string bits, string outputFileName)
     {
         var bytes = new byte[bits.Length / 8];
 
@@ -53,6 +53,6 @@ public static class Bits
             bytes[i / 8] = Convert.ToByte(bits.Substring(i, 8), 2);
         }
         
-        File.WriteAllBytes("./hidden_image.png", bytes);
+        File.WriteAllBytes(outputFileName, bytes);
     }
 }

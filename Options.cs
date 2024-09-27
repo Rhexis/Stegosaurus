@@ -24,13 +24,13 @@ public class Options
     
     // For mode "fetch"
     [Option('s', "src", Required = false, HelpText = "Source of the image containing the hidden data.")]
-    public string Source { get; set; }
+    public string? Source { get; set; }
     
     // For mode "hide"
     [Option('c', "content", Required = false, HelpText = "Location of image or text to hide.")]
-    public string Content { get; set; }
+    public string? Content { get; set; }
     [Option('i', "input", Required = false, HelpText = "The image to hide content in.")]
-    public string Input { get; set; }
+    public string? Input { get; set; }
     [Option('o', "output", Required = false, HelpText = "The location & name of the desired output file.")]
-    public string Output { get; set; }
+    public string? Output { get; set; }
 }

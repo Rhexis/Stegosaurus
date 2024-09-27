@@ -18,13 +18,13 @@ public abstract class Program
             case Mode.hide:
                 if (options.Type == Type.text)
                 {
-                    var messageBits = Bits.FromMessage(options.Content);
-                    Hide.Bits(messageBits, options.Input, options.Output);
+                    var messageBits = Bits.FromMessage(options.Content!);
+                    Hide.Bits(messageBits, options.Input!, options.Output!);
                 }
                 else if (options.Type == Type.image)
                 {
-                    var fileBits = Bits.FromFile(options.Content);
-                    Hide.Bits(fileBits, options.Input, options.Output);
+                    var fileBits = Bits.FromFile(options.Content!);
+                    Hide.Bits(fileBits, options.Input!, options.Output!);
                 }
                 else
                 {
@@ -35,13 +35,14 @@ public abstract class Program
             case Mode.fetch:
                 if (options.Type == Type.text)
                 {
-                    var hiddenMessage = Fetch.Text(options.Source);
+                    var hiddenMessage = Fetch.Text(options.Source!);
                     Console.WriteLine($"Hidden Message: [{hiddenMessage}]");
                 }
                 else if (options.Type == Type.image)
                 {
-                    Fetch.File(options.Source);
-                    Console.WriteLine($"Hidden File Found");
+                    if (options.Output != null) Fetch.File(options.Source!, options.Output);
+                    Fetch.File(options.Source!);
+                    Console.WriteLine("Hidden File Found");
                 }
                 else
                 {

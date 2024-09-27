@@ -15,12 +15,12 @@ public static class Fetch
         return Bits.ToMessage(messageBits);
     }
 
-    public static void File(string imagePath)
+    public static void File(string imagePath, string outputFileName = "./hidden_image.png")
     {
         using var image = Image.Load<Rgba32>(imagePath);
         var imageLength = ExtractEmbeddedBitsLength(image);
         var imageBits = ExtractBitsFromImage(image, imageLength);
-        Bits.ToFile(imageBits);
+        Bits.ToFile(imageBits, outputFileName);
     }
     
     private static int ExtractEmbeddedBitsLength(Image<Rgba32> image)
