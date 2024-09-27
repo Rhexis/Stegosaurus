@@ -10,14 +10,22 @@ public static class Fetch
     {
         using var image = Image.Load<Rgba32>(imagePath);
         var messageLength = ExtractEmbeddedBitsLength(image);
-        var messageBits = ExtractMessageFromImage(image, messageLength);
+        var messageBits = ExtractBitsFromImage(image, messageLength);
 
-        return Message.FromBits(messageBits);
+        return Bits.ToMessage(messageBits);
+    }
+
+    public static void File(string imagePath)
+    {
+        using var image = Image.Load<Rgba32>(imagePath);
+        var imageLength = ExtractEmbeddedBitsLength(image);
+        var imageBits = ExtractBitsFromImage(image, imageLength);
+        Bits.ToFile(imageBits);
     }
     
     private static int ExtractEmbeddedBitsLength(Image<Rgba32> image)
     {
-        StringBuilder lengthBits = new StringBuilder();
+        var lengthBits = new StringBuilder();
 
         // Extract length from the last 8 pixels
         int lengthCounter = 0;
@@ -43,9 +51,9 @@ public static class Fetch
         return Convert.ToInt32(lengthBits.ToString(), 2);
     }
     
-    private static string ExtractMessageFromImage(Image<Rgba32> image, int messageLength)
+    private static string ExtractBitsFromImage(Image<Rgba32> image, int messageLength)
     {
-        StringBuilder messageBits = new StringBuilder();
+        var messageBits = new StringBuilder();
 
         var messageCounter = 0;
         for (int x = 0; x < image.Width; x++)

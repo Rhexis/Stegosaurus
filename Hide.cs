@@ -10,7 +10,7 @@ public static class Hide
     {
         using var image = Image.Load<Rgba32>(inputImagePath);
 
-        if (bits.Length > (image.Width * image.Height) * 3)
+        if (bits.Length > (image.Width - 9) * (image.Height - 2) * 3)
         {
             Console.WriteLine("Message is too long to hide in this image.");
             return;

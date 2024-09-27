@@ -18,8 +18,13 @@ public abstract class Program
             case Mode.hide:
                 if (options.Type == Type.text)
                 {
-                    var messageBits = Message.ToBits(options.Content);
+                    var messageBits = Bits.FromMessage(options.Content);
                     Hide.Bits(messageBits, options.Input, options.Output);
+                }
+                else if (options.Type == Type.image)
+                {
+                    var fileBits = Bits.FromFile(options.Content);
+                    Hide.Bits(fileBits, options.Input, options.Output);
                 }
                 else
                 {
@@ -28,8 +33,21 @@ public abstract class Program
                 break;
 
             case Mode.fetch:
-                var hiddenMessage = Fetch.Text(options.Source);
-                Console.WriteLine($"Hidden Message: [{hiddenMessage}]");
+                if (options.Type == Type.text)
+                {
+                    var hiddenMessage = Fetch.Text(options.Source);
+                    Console.WriteLine($"Hidden Message: [{hiddenMessage}]");
+                }
+                else if (options.Type == Type.image)
+                {
+                    Fetch.File(options.Source);
+                    Console.WriteLine($"Hidden File Found");
+                }
+                else
+                {
+                    Console.WriteLine("Unsupported type for hiding.");
+                }
+
                 break;
 
             default:
