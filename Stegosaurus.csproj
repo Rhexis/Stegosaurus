@@ -18,9 +18,6 @@
       <None Update="steg.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="output.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
 </Project>
